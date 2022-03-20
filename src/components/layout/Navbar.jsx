@@ -1,27 +1,66 @@
-import React from 'react';
-import { FaGithub } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaBook, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export const Navbar = ({ title }) => {
+  const navigation = [
+    { id: 1, name: 'Home', to: '/', current: true },
+    { id: 2, name: 'About', to: '/about', current: false },
+    { id: 3, name: 'Login', to: '/login', current: false },
+    { id: 4, name: 'registrar', to: '/register', current: false },
+  ];
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    open ? setOpen(false) : setOpen(false);
+  };
+
   return (
-    <nav className='navbar mb-12 shadow-lg bg-neutral text-neutral-content'>
+    <nav className='navbar mb-12 shadow-lg bg-indigo-700 text-neutral-content'>
       <div className='container mx-auto'>
         <div className='flex-none px-2 mx-2'>
-          <FaGithub className='inline pr-2 text-3xl' />
-          <Link to='/' className='text-lg font-bold align-middle'>
+          <FaBook className='inline pr-2 text-3xl text-white' />
+          <Link to='/' className='text-lg text-white font-bold align-middle'>
             {title}
           </Link>
         </div>
-        <div className='flex-1 px-2 mx-2'>
+
+        {/* Navigation Desktop */}
+        <div className='hidden md:block flex-1 px-2 mx-2'>
           <div className='flex justify-end'>
-            <Link to='/' className='btn btn-ghost btn-sm rounded-btn'>
-              Home
-            </Link>
-            <Link to='/about' className='btn btn-ghost btn-sm rounded-btn'>
-              About
-            </Link>
+            {navigation.map((nav) => (
+              <Link
+                key={nav.id}
+                to={nav.to}
+                className='btn btn-ghost btn-sm rounded-btn text-white'
+              >
+                {nav.name}
+              </Link>
+            ))}
           </div>
+        </div>
+
+        <div className='md:hidden mx-auto dropdown dropdown-end'>
+          <label
+            tabIndex='0'
+            className='btn btn-square text-white hover:text-white hover:bg-gray-700  '
+          >
+            <FaBars className='block  h-6 w-6' aria-hidden='true' />
+          </label>
+
+          <ul
+            tabIndex='0'
+            className='menu dropdown-content p-2 m-2 shadow bg-gray-800 rounded-box w-52 mt-4'
+          >
+            <li>
+              {navigation.map((nav) => (
+                <Link key={nav.id} to={nav.to}>
+                  {nav.name}
+                </Link>
+              ))}
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -29,7 +68,7 @@ export const Navbar = ({ title }) => {
 };
 
 Navbar.defaultProps = {
-  title: 'Github Finder',
+  title: 'Be4writing (Ramiel React)',
 };
 Navbar.prototype = {
   title: PropTypes.string,
