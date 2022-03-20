@@ -16,7 +16,7 @@ export const User = () => {
   useEffect(() => {
     getUser(params.login);
     getUserRepos(params.login);
-  }, []);
+  }, [getUser, getUserRepos, params.login]);
 
   const {
     name,

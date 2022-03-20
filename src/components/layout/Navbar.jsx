@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaBook, FaBars, FaTimes } from 'react-icons/fa';
+import React from 'react';
+import { FaBook, FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -10,11 +10,6 @@ export const Navbar = ({ title }) => {
     { id: 3, name: 'Login', to: '/login', current: false },
     { id: 4, name: 'registrar', to: '/register', current: false },
   ];
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    open ? setOpen(false) : setOpen(false);
-  };
 
   return (
     <nav className='navbar mb-12 shadow-lg bg-indigo-700 text-neutral-content'>
